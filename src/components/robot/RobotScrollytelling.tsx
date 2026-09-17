@@ -5,13 +5,15 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Robot3DScene } from "./Robot3DScene";
+import Image from "next/image";
 import { 
   ArrowDown, 
   ExternalLink, 
   Copy, 
   Check, 
   Award, 
-  ArrowUpRight 
+  ArrowUpRight,
+  Briefcase
 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -58,7 +60,7 @@ export function RobotScrollytelling() {
       start: "top top",
       end: "bottom bottom",
       pin: pinSectionRef.current,
-      scrub: 1.2,
+      scrub: 0.8,
       onUpdate: (self) => {
         setScrollProgress(self.progress);
       },
@@ -74,21 +76,21 @@ export function RobotScrollytelling() {
     const start = containerRef.current.offsetTop;
     const height = containerRef.current.offsetHeight - window.innerHeight;
     
-    // Normalized phase midpoints
-    const targetP = [0.05, 0.23, 0.41, 0.59, 0.77, 0.95][phaseIndex];
+    // Normalized phase targets
+    const targets = [0.05, 0.25, 0.45, 0.65, 0.82, 0.96];
     window.scrollTo({
-      top: start + height * targetP,
+      top: start + height * targets[phaseIndex],
       behavior: "smooth",
     });
   };
 
-  // Phase visibility ranges
+  // Phase visibility ranges aligned with robot gestures
   const isPhase0 = scrollProgress < 0.15;
-  const isPhase1 = scrollProgress >= 0.15 && scrollProgress < 0.32;
-  const isPhase2 = scrollProgress >= 0.32 && scrollProgress < 0.50;
-  const isPhase3 = scrollProgress >= 0.50 && scrollProgress < 0.68;
-  const isPhase4 = scrollProgress >= 0.68 && scrollProgress < 0.85;
-  const isPhase5 = scrollProgress >= 0.85;
+  const isPhase1 = scrollProgress >= 0.15 && scrollProgress < 0.35;
+  const isPhase2 = scrollProgress >= 0.35 && scrollProgress < 0.55;
+  const isPhase3 = scrollProgress >= 0.55 && scrollProgress < 0.75;
+  const isPhase4 = scrollProgress >= 0.75 && scrollProgress < 0.90;
+  const isPhase5 = scrollProgress >= 0.90;
 
   return (
     <div 
@@ -98,35 +100,20 @@ export function RobotScrollytelling() {
     >
       <div 
         ref={pinSectionRef} 
-        className="relative w-full h-screen overflow-hidden flex items-center justify-center"
+        className="relative w-full h-screen h-[100dvh] overflow-hidden flex items-center justify-center"
       >
         {/* Subtle Architectural Grid */}
         <div className="absolute inset-0 bg-grid-light opacity-50 pointer-events-none" />
 
-        {/* Central 3D Scene with Persistent Robot Actor & Dynamic Camera */}
-        <div className="absolute inset-0 z-10 w-full h-full">
+        {/* Central Component: Fixed 3D Robot with Dynamic Screen-Swiping Kinematics */}
+        <div className="absolute inset-0 z-10 w-full h-full pointer-events-none">
           <Robot3DScene scrollProgress={scrollProgress} />
         </div>
 
-        {/* Top Minimalist Brand Header */}
-        <header className="absolute top-6 left-6 right-6 z-30 flex items-center justify-between pointer-events-none">
-          <div className="pointer-events-auto flex items-center space-x-3">
-            <div className="w-8 h-8 rounded-full bg-neutral-900 text-white flex items-center justify-center font-mono font-bold text-xs">
-              JS
-            </div>
-            <div>
-              <div className="text-xs font-bold tracking-tight text-neutral-900">
-                JOEL SHIBU
-              </div>
-              <div className="font-mono text-[10px] text-neutral-400">
-                AI SYSTEMS ENGINEER
-              </div>
-            </div>
-          </div>
-
-          {/* Real Location Coordinates */}
-          <div className="font-mono text-xs text-neutral-400 hidden sm:block">
-            09.9312° N, 76.2673° E · KERALA, INDIA
+        {/* Top Minimalist Location Indicator */}
+        <header className="absolute top-4 sm:top-6 right-4 sm:right-6 z-30 pointer-events-none">
+          <div className="font-mono text-[11px] sm:text-xs text-neutral-400 hidden sm:block">
+            ADOOR, KERALA, INDIA
           </div>
         </header>
 
@@ -134,84 +121,93 @@ export function RobotScrollytelling() {
             PHASE 0: HERO OVERVIEW (p = 0.00 - 0.15)
         ======================================================== */}
         <div 
-          className={`absolute inset-0 z-20 flex flex-col items-center justify-between pt-28 pb-20 px-6 pointer-events-none transition-all duration-700 ${
+          className={`absolute inset-0 z-20 flex flex-col items-center justify-between pt-16 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 pointer-events-none transition-all duration-700 ${
             isPhase0 ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8 pointer-events-none"
           }`}
         >
-          <div className="text-center max-w-3xl pointer-events-auto">
-            <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-neutral-900 leading-none mb-6">
+          <div className="text-center max-w-3xl pointer-events-auto mt-2 sm:mt-0">
+            {/* Joel Shibu Studio Portrait Avatar */}
+            <div className="relative w-16 h-16 sm:w-22 sm:h-22 md:w-24 md:h-24 mx-auto mb-3 sm:mb-5">
+              <Image
+                src="/images/joel-shibu.jpeg"
+                alt="Joel Shibu"
+                width={96}
+                height={96}
+                className="w-full h-full rounded-full object-cover border-2 border-white shadow-md ring-2 ring-neutral-200/80"
+                priority
+              />
+            </div>
+
+            <h1 className="text-4xl sm:text-7xl md:text-8xl font-black tracking-tight text-neutral-900 leading-none mb-2 sm:mb-4">
               JOEL SHIBU
             </h1>
-            <p className="text-neutral-600 text-base sm:text-lg md:text-xl font-normal max-w-xl mx-auto leading-relaxed mb-8">
-              AI Systems Engineer & Full-Stack Developer. Building scalable machine learning pipelines, edge inference architectures, and autonomous robotics.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {["PyTorch", "TensorFlow.js", "ROS", "OpenCV", "Next.js", "FastAPI", "ESP32"].map((tech) => (
-                <span key={tech} className="px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 font-mono text-xs border border-neutral-200/80">
-                  {tech}
-                </span>
-              ))}
+            <div className="font-mono text-[11px] sm:text-xs md:text-sm font-semibold text-sky-600 tracking-wider uppercase mb-3 sm:mb-4 px-2">
+              AI Engineering Student · APJ Abdul Kalam Technological University
             </div>
+            <p className="text-neutral-600 text-sm sm:text-lg md:text-xl font-normal max-w-xl mx-auto leading-relaxed mb-6 sm:mb-8 px-2 sm:px-4">
+              AI Generalist & Full Stack Developer transforming research into real-world systems across healthcare diagnostics, autonomous robotics, and agentic LLM integration.
+            </p>
           </div>
 
           <div className="flex flex-col items-center pointer-events-auto">
             <span className="font-mono text-[10px] tracking-widest uppercase text-neutral-400 mb-2">
-              SCROLL TO INITIATE SWIPE SEQUENCE
+              SCROLL TO EXPLORE PROJECTS
             </span>
             <button 
               onClick={() => jumpToPhase(1)}
-              className="w-7 h-7 rounded-full border border-neutral-300 flex items-center justify-center text-neutral-700 hover:bg-neutral-100 transition-colors"
+              className="w-9 h-9 sm:w-8 sm:h-8 rounded-full border border-neutral-300 flex items-center justify-center text-neutral-700 hover:bg-neutral-100 active:scale-95 transition-all shadow-sm"
+              aria-label="Scroll to explore projects"
             >
-              <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+              <ArrowDown className="w-4 h-4 sm:w-3.5 sm:h-3.5 animate-bounce" />
             </button>
           </div>
         </div>
 
         {/* ========================================================
-            PHASE 1: NEUROSIGHT (p = 0.15 - 0.32)
+            PHASE 1: NEUROSIGHT (p = 0.15 - 0.35)
             Right Arm Sweeps Leftward, Panel on Left
         ======================================================== */}
         <div 
-          className={`absolute left-6 sm:left-12 lg:left-20 top-1/2 -translate-y-1/2 z-20 max-w-lg w-[calc(100%-3rem)] md:w-[440px] pointer-events-auto transition-all duration-700 ease-out ${
+          className={`absolute left-3 sm:left-8 lg:left-16 xl:left-20 top-1/2 -translate-y-1/2 z-20 max-w-lg w-[calc(100%-1.5rem)] sm:w-[calc(100%-4rem)] md:w-[440px] pointer-events-auto transition-all duration-700 ease-out ${
             isPhase1 
               ? "opacity-100 translate-x-0 scale-100" 
-              : "opacity-0 -translate-x-12 scale-95 pointer-events-none"
+              : "opacity-0 -translate-x-8 sm:-translate-x-12 scale-95 pointer-events-none"
           }`}
         >
-          <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-neutral-200/80 shadow-clean">
-            <div className="font-mono text-xs font-bold text-sky-600 mb-2">
+          <div className="glass-panel p-5 sm:p-7 md:p-8 rounded-3xl border border-neutral-200/80 shadow-clean max-h-[82dvh] sm:max-h-[88vh] overflow-y-auto">
+            <div className="font-mono text-[11px] sm:text-xs font-bold text-sky-600 mb-1.5 sm:mb-2">
               01 {"//"} HEALTHCARE AI
             </div>
-            <h2 className="text-3xl font-black tracking-tight text-neutral-900 mb-1">
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-neutral-900 mb-1">
               NeuroSight
             </h2>
-            <p className="text-xs font-medium text-neutral-500 mb-4">
-              Privacy-First Neurological Screening AI
+            <p className="text-xs font-medium text-neutral-500 mb-3 sm:mb-4">
+              On-Device Neurological Health Screening
             </p>
-            <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-6">
-              AI-powered dementia and neurological screening through eye movement analysis. Deep learning models run entirely in-browser with zero server data retention.
+            <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-4 sm:mb-6">
+              Browser-based AI platform for neurological screening through real-time eye-movement analysis. Built with TensorFlow.js and React to process all inference on-device for complete patient data privacy.
             </p>
 
             {/* Real Performance Metrics */}
-            <div className="grid grid-cols-3 gap-2.5 mb-6">
-              <div className="p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
-                <div className="text-xl font-extrabold text-neutral-900">94%</div>
-                <div className="text-[10px] font-mono text-neutral-400 uppercase mt-0.5">Accuracy</div>
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5 mb-4 sm:mb-6">
+              <div className="p-2 sm:p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
+                <div className="text-lg sm:text-xl font-extrabold text-neutral-900">94%</div>
+                <div className="text-[9px] sm:text-[10px] font-mono text-neutral-400 uppercase mt-0.5 leading-tight">Accuracy</div>
               </div>
-              <div className="p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
-                <div className="text-xl font-extrabold text-neutral-900">47ms</div>
-                <div className="text-[10px] font-mono text-neutral-400 uppercase mt-0.5">Latency</div>
+              <div className="p-2 sm:p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
+                <div className="text-lg sm:text-xl font-extrabold text-neutral-900">47ms</div>
+                <div className="text-[9px] sm:text-[10px] font-mono text-neutral-400 uppercase mt-0.5 leading-tight">Latency</div>
               </div>
-              <div className="p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
-                <div className="text-xl font-extrabold text-neutral-900">100%</div>
-                <div className="text-[10px] font-mono text-neutral-400 uppercase mt-0.5">Client-Side</div>
+              <div className="p-2 sm:p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
+                <div className="text-lg sm:text-xl font-extrabold text-neutral-900">100%</div>
+                <div className="text-[9px] sm:text-[10px] font-mono text-neutral-400 uppercase mt-0.5 leading-tight">On-Device Privacy</div>
               </div>
             </div>
 
             {/* Stack Tags */}
-            <div className="flex flex-wrap gap-1.5 mb-6">
-              {["TensorFlow.js", "React 19", "FastAPI"].map((tag) => (
-                <span key={tag} className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-neutral-100 text-neutral-700 border border-neutral-200/60">
+            <div className="flex flex-wrap gap-1.5 mb-4 sm:mb-6">
+              {["TensorFlow.js", "React 19", "FastAPI", "Python"].map((tag) => (
+                <span key={tag} className="text-[10px] sm:text-[11px] font-mono px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-neutral-100 text-neutral-700 border border-neutral-200/60">
                   {tag}
                 </span>
               ))}
@@ -222,215 +218,199 @@ export function RobotScrollytelling() {
               href="https://github.com/MedBotix/NeuroSight" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold tracking-wide transition-colors"
+              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold tracking-wide transition-colors min-h-[44px]"
             >
-              <span>View Architecture & Source</span>
+              <span>View Repository & Architecture</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
 
         {/* ========================================================
-            PHASE 2: RESP-AI (p = 0.32 - 0.50)
-            Left Arm Sweeps Rightward, Panel on Right
+            PHASE 2: RESP-AI (p = 0.35 - 0.55)
+            Low-Angle View, Respiratory Acoustic Stream
         ======================================================== */}
         <div 
-          className={`absolute right-6 sm:right-12 lg:right-20 top-1/2 -translate-y-1/2 z-20 max-w-lg w-[calc(100%-3rem)] md:w-[440px] pointer-events-auto transition-all duration-700 ease-out ${
+          className={`absolute right-3 sm:right-8 lg:right-16 xl:right-20 top-1/2 -translate-y-1/2 z-20 max-w-lg w-[calc(100%-1.5rem)] sm:w-[calc(100%-4rem)] md:w-[450px] pointer-events-auto transition-all duration-700 ease-out ${
             isPhase2 
               ? "opacity-100 translate-x-0 scale-100" 
-              : "opacity-0 translate-x-12 scale-95 pointer-events-none"
+              : "opacity-0 translate-x-8 sm:translate-x-12 scale-95 pointer-events-none"
           }`}
         >
-          <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-neutral-200/80 shadow-clean">
-            <div className="font-mono text-xs font-bold text-sky-600 mb-2">
-              02 {"//"} ACOUSTIC INTELLIGENCE
+          <div className="glass-panel p-5 sm:p-7 md:p-8 rounded-3xl border border-neutral-200/80 shadow-clean bg-white/88 backdrop-blur-md max-h-[82dvh] sm:max-h-[88vh] overflow-y-auto">
+            <div className="font-mono text-[11px] sm:text-xs font-bold text-sky-600 mb-1.5 sm:mb-2">
+              02 {"//"} ACOUSTIC AI
             </div>
-            <h2 className="text-3xl font-black tracking-tight text-neutral-900 mb-1">
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-neutral-900 mb-1">
               RESP-AI
             </h2>
-            <p className="text-xs font-medium text-neutral-500 mb-4">
-              Real-Time Respiratory Monitoring
+            <p className="text-xs font-medium text-neutral-500 mb-3 sm:mb-4">
+              Real-Time Pulmonary Acoustic Monitoring
             </p>
-            <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-6">
-              Cross-platform mobile application utilizing CNN-based acoustic analysis for respiratory health tracking with live WebSockets streaming capability.
+            <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-4 sm:mb-6">
+              Real-time respiratory health monitoring system utilizing CNN-based acoustic analysis and a two-stage cascade architecture. Streams 48 kHz audio over WebSockets with cross-platform Flutter deployment.
             </p>
 
             {/* Real Performance Metrics */}
-            <div className="grid grid-cols-3 gap-2.5 mb-6">
-              <div className="p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
-                <div className="text-xl font-extrabold text-neutral-900">97.3%</div>
-                <div className="text-[10px] font-mono text-neutral-400 uppercase mt-0.5">Accuracy</div>
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5 mb-4 sm:mb-6">
+              <div className="p-2 sm:p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
+                <div className="text-lg sm:text-xl font-extrabold text-neutral-900">97.3%</div>
+                <div className="text-[9px] sm:text-[10px] font-mono text-neutral-400 uppercase mt-0.5 leading-tight">Accuracy</div>
               </div>
-              <div className="p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
-                <div className="text-xl font-extrabold text-neutral-900">94ms</div>
-                <div className="text-[10px] font-mono text-neutral-400 uppercase mt-0.5">Latency</div>
+              <div className="p-2 sm:p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
+                <div className="text-lg sm:text-xl font-extrabold text-neutral-900">94ms</div>
+                <div className="text-[9px] sm:text-[10px] font-mono text-neutral-400 uppercase mt-0.5 leading-tight">Latency</div>
               </div>
-              <div className="p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
-                <div className="text-xl font-extrabold text-neutral-900">48 kHz</div>
-                <div className="text-[10px] font-mono text-neutral-400 uppercase mt-0.5">Stream</div>
+              <div className="p-2 sm:p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
+                <div className="text-lg sm:text-xl font-extrabold text-neutral-900">48 kHz</div>
+                <div className="text-[9px] sm:text-[10px] font-mono text-neutral-400 uppercase mt-0.5 leading-tight">Audio Stream</div>
               </div>
             </div>
 
             {/* Stack Tags */}
-            <div className="flex flex-wrap gap-1.5 mb-6">
-              {["Flutter", "Python", "CNN", "WebSockets"].map((tag) => (
-                <span key={tag} className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-neutral-100 text-neutral-700 border border-neutral-200/60">
+            <div className="flex flex-wrap gap-1.5 mb-4 sm:mb-6">
+              {["CNN", "Flutter", "WebSockets", "Python"].map((tag) => (
+                <span key={tag} className="text-[10px] sm:text-[11px] font-mono px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-neutral-100 text-neutral-700 border border-neutral-200/60">
                   {tag}
                 </span>
               ))}
             </div>
 
+            {/* Architecture Link */}
             <a 
               href="https://github.com/MedTechHealth/RESP-AI" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold tracking-wide transition-colors"
+              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold tracking-wide transition-colors min-h-[44px]"
             >
-              <span>View Architecture & Source</span>
+              <span>View Repository & Architecture</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
 
         {/* ========================================================
-            PHASE 3: AIRGUARDIAN (p = 0.50 - 0.68)
-            High-Angle Overhead Drone View, Panel on Center-Left
+            PHASE 3: AIRGUARDIAN (p = 0.55 - 0.75)
+            Tactical Overhead View, Drone Telemetry
         ======================================================== */}
         <div 
-          className={`absolute left-6 sm:left-12 lg:left-20 top-1/2 -translate-y-1/2 z-20 max-w-lg w-[calc(100%-3rem)] md:w-[440px] pointer-events-auto transition-all duration-700 ease-out ${
+          className={`absolute left-3 sm:left-8 lg:left-16 xl:left-20 top-1/2 -translate-y-1/2 z-20 max-w-xl w-[calc(100%-1.5rem)] sm:w-[calc(100%-4rem)] md:w-[480px] pointer-events-auto transition-all duration-700 ease-out ${
             isPhase3 
-              ? "opacity-100 translate-y-[-50%] scale-100" 
-              : "opacity-0 translate-y-[-45%] scale-95 pointer-events-none"
+              ? "opacity-100 translate-x-0 scale-100" 
+              : "opacity-0 -translate-x-8 sm:-translate-x-12 scale-95 pointer-events-none"
           }`}
         >
-          <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-neutral-200/80 shadow-clean">
-            <div className="font-mono text-xs font-bold text-sky-600 mb-2">
+          <div className="glass-panel p-5 sm:p-7 md:p-8 rounded-3xl border border-neutral-200/80 shadow-clean bg-white/88 backdrop-blur-md max-h-[82dvh] sm:max-h-[88vh] overflow-y-auto">
+            <div className="font-mono text-[11px] sm:text-xs font-bold text-sky-600 mb-1.5 sm:mb-2">
               03 {"//"} AUTONOMOUS ROBOTICS
             </div>
-            <h2 className="text-3xl font-black tracking-tight text-neutral-900 mb-1">
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-neutral-900 mb-1">
               AirGuardian
             </h2>
-            <p className="text-xs font-medium text-neutral-500 mb-4">
-              Autonomous Drone Intelligence & SLAM
+            <p className="text-xs font-medium text-neutral-500 mb-3 sm:mb-4">
+              Autonomous Indoor Drone for Environmental Intelligence
             </p>
-            <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-6">
-              Autonomous drone system for indoor air quality monitoring. Integrated IoT gas leak sensors with OpenCV navigation algorithms for real-time risk assessment.
+            <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-4 sm:mb-6">
+              Autonomous indoor drone navigation system for environmental intelligence and industrial safety. Integrates 8-sensor IoT telemetry fusion with OpenCV visual processing and ROS SLAM mapping over 500m² coverage.
             </p>
 
             {/* Real Performance Metrics */}
-            <div className="grid grid-cols-3 gap-2.5 mb-6">
-              <div className="p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
-                <div className="text-xl font-extrabold text-neutral-900">500m²</div>
-                <div className="text-[10px] font-mono text-neutral-400 uppercase mt-0.5">Coverage</div>
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5 mb-4 sm:mb-6">
+              <div className="p-2 sm:p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
+                <div className="text-lg sm:text-xl font-extrabold text-neutral-900">500m²</div>
+                <div className="text-[9px] sm:text-[10px] font-mono text-neutral-400 uppercase mt-0.5 leading-tight">Coverage</div>
               </div>
-              <div className="p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
-                <div className="text-xl font-extrabold text-neutral-900">8 Array</div>
-                <div className="text-[10px] font-mono text-neutral-400 uppercase mt-0.5">Sensors</div>
+              <div className="p-2 sm:p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
+                <div className="text-lg sm:text-xl font-extrabold text-neutral-900">8-Sensor</div>
+                <div className="text-[9px] sm:text-[10px] font-mono text-neutral-400 uppercase mt-0.5 leading-tight">Sensor Fusion</div>
               </div>
-              <div className="p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
-                <div className="text-xl font-extrabold text-neutral-900">SLAM</div>
-                <div className="text-[10px] font-mono text-neutral-400 uppercase mt-0.5">Vision</div>
+              <div className="p-2 sm:p-3 rounded-2xl bg-neutral-50 border border-neutral-100 text-center">
+                <div className="text-lg sm:text-xl font-extrabold text-neutral-900">SLAM</div>
+                <div className="text-[9px] sm:text-[10px] font-mono text-neutral-400 uppercase mt-0.5 leading-tight">Autonomous Nav</div>
               </div>
             </div>
 
             {/* Stack Tags */}
-            <div className="flex flex-wrap gap-1.5 mb-6">
-              {["Python", "OpenCV", "ESP32", "INAV", "ROS"].map((tag) => (
-                <span key={tag} className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-neutral-100 text-neutral-700 border border-neutral-200/60">
+            <div className="flex flex-wrap gap-1.5 mb-4 sm:mb-6">
+              {["OpenCV", "ESP32", "ROS", "SLAM"].map((tag) => (
+                <span key={tag} className="text-[10px] sm:text-[11px] font-mono px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-neutral-100 text-neutral-700 border border-neutral-200/60">
                   {tag}
                 </span>
               ))}
             </div>
 
+            {/* Architecture Link */}
             <a 
               href="https://github.com/Joel-Shibu" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold tracking-wide transition-colors"
+              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold tracking-wide transition-colors min-h-[44px]"
             >
-              <span>Explore Robotics Repository</span>
+              <span>View Robotics Repository</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
 
         {/* ========================================================
-            PHASE 4: TECHNICAL ARSENAL (p = 0.68 - 0.85)
-            3/4 CAD View, Holographic Stack Grid
+            PHASE 4: TECHNICAL ARSENAL (p = 0.75 - 0.90)
+            Robot Taps & Unfolds Matrix
         ======================================================== */}
         <div 
-          className={`absolute left-6 sm:left-12 lg:left-20 top-1/2 -translate-y-1/2 z-20 max-w-xl w-[calc(100%-3rem)] md:w-[500px] pointer-events-auto transition-all duration-700 ease-out ${
+          className={`absolute right-3 sm:right-8 lg:right-16 xl:right-20 top-1/2 -translate-y-1/2 z-20 max-w-xl w-[calc(100%-1.5rem)] sm:w-[calc(100%-4rem)] md:w-[480px] pointer-events-auto transition-all duration-700 ease-out ${
             isPhase4 
-              ? "opacity-100 translate-y-[-50%] scale-100" 
-              : "opacity-0 translate-y-[-45%] scale-95 pointer-events-none"
+              ? "opacity-100 translate-x-0 scale-100" 
+              : "opacity-0 translate-x-8 sm:translate-x-12 scale-95 pointer-events-none"
           }`}
         >
-          <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-neutral-200/80 shadow-clean">
-            <div className="font-mono text-xs font-bold text-sky-600 mb-2">
+          <div className="glass-panel p-5 sm:p-7 md:p-8 rounded-3xl border border-neutral-200/80 shadow-clean bg-white/88 backdrop-blur-md max-h-[82dvh] sm:max-h-[88vh] overflow-y-auto">
+            <div className="font-mono text-[11px] sm:text-xs font-bold text-sky-600 mb-1.5 sm:mb-2">
               04 {"//"} TECHNICAL ARSENAL
             </div>
-            <h2 className="text-3xl font-black tracking-tight text-neutral-900 mb-6">
-              Engineering Stack
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-neutral-900 mb-1">
+              Technical Arsenal
             </h2>
+            <p className="text-xs font-medium text-neutral-500 mb-4 sm:mb-6">
+              Verified production tools and engineering frameworks
+            </p>
 
-            <div className="space-y-4 mb-6">
+            <div className="space-y-3 sm:space-y-4">
               <div>
-                <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-2">
-                  AI & MACHINE LEARNING
+                <div className="font-mono text-[10px] sm:text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5 sm:mb-2">
+                  AI & Machine Learning
                 </div>
                 <div className="flex flex-wrap gap-1.5">
-                  {["PyTorch", "TensorFlow.js", "Python", "OpenCV", "CNNs", "FastAPI"].map((s) => (
-                    <span key={s} className="text-xs font-mono px-2.5 py-1 rounded-md bg-neutral-100 text-neutral-800 border border-neutral-200/60">
-                      {s}
+                  {["PyTorch", "TensorFlow", "TensorFlow.js", "OpenCV", "CNNs"].map((item) => (
+                    <span key={item} className="text-[11px] sm:text-xs font-medium px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-neutral-50 border border-neutral-200/60 text-neutral-800">
+                      {item}
                     </span>
                   ))}
                 </div>
               </div>
 
               <div>
-                <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-2">
-                  ROBOTICS & EMBEDDED
+                <div className="font-mono text-[10px] sm:text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5 sm:mb-2">
+                  Systems & Robotics
                 </div>
                 <div className="flex flex-wrap gap-1.5">
-                  {["ROS", "ESP32 C++", "Arduino", "INAV", "Sensor Fusion"].map((s) => (
-                    <span key={s} className="text-xs font-mono px-2.5 py-1 rounded-md bg-neutral-100 text-neutral-800 border border-neutral-200/60">
-                      {s}
+                  {["ROS / ROS2", "ESP32 (C++)", "Arduino", "SLAM", "WebSockets"].map((item) => (
+                    <span key={item} className="text-[11px] sm:text-xs font-medium px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-neutral-50 border border-neutral-200/60 text-neutral-800">
+                      {item}
                     </span>
                   ))}
                 </div>
               </div>
 
               <div>
-                <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-2">
-                  WEB & CLOUD INFRASTRUCTURE
+                <div className="font-mono text-[10px] sm:text-[11px] text-neutral-400 uppercase tracking-wider mb-1.5 sm:mb-2">
+                  Full-Stack, Cloud & DevOps
                 </div>
                 <div className="flex flex-wrap gap-1.5">
-                  {["React 19", "Next.js 16", "Docker", "GCP", "WebSockets", "Flutter"].map((s) => (
-                    <span key={s} className="text-xs font-mono px-2.5 py-1 rounded-md bg-neutral-100 text-neutral-800 border border-neutral-200/60">
-                      {s}
+                  {["FastAPI", "React 19", "Flutter", "Docker", "GCP", "CI/CD", "Python", "TypeScript"].map((item) => (
+                    <span key={item} className="text-[11px] sm:text-xs font-medium px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-neutral-50 border border-neutral-200/60 text-neutral-800">
+                      {item}
                     </span>
                   ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Certifications */}
-            <div className="pt-4 border-t border-neutral-100">
-              <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-2">
-                VERIFIED ACCREDITATION
-              </div>
-              <div className="space-y-1.5 text-xs text-neutral-700">
-                <div className="flex items-center space-x-2">
-                  <Award className="w-3.5 h-3.5 text-sky-600" />
-                  <span>Google Cloud — Prompt Design</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Award className="w-3.5 h-3.5 text-sky-600" />
-                  <span>Johnson & Johnson — Robotics & Controls</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Award className="w-3.5 h-3.5 text-sky-600" />
-                  <span>Electronic Arts — Software Engineering</span>
                 </div>
               </div>
             </div>
@@ -438,111 +418,129 @@ export function RobotScrollytelling() {
         </div>
 
         {/* ========================================================
-            PHASE 5: DIRECT CONTACT (p = 0.85 - 1.00)
-            Frontal Eye-Level, Contact Channels
+            PHASE 5: DIRECT CONTACT & ACCREDITATIONS (p = 0.90 - 1.00)
+            Direct Contact & Verified Credentials
         ======================================================== */}
         <div 
-          className={`absolute inset-x-6 top-1/2 -translate-y-1/2 z-20 max-w-xl mx-auto pointer-events-auto transition-all duration-700 ease-out ${
+          className={`absolute inset-0 z-20 flex flex-col items-center justify-center p-3 sm:p-6 pointer-events-none transition-all duration-700 ease-out ${
             isPhase5 
-              ? "opacity-100 translate-y-[-50%] scale-100" 
-              : "opacity-0 translate-y-[-45%] scale-95 pointer-events-none"
+              ? "opacity-100 scale-100" 
+              : "opacity-0 scale-95 pointer-events-none"
           }`}
         >
-          <div className="glass-panel p-8 rounded-3xl border border-neutral-200/80 shadow-clean text-center">
-            <div className="font-mono text-xs font-bold text-sky-600 mb-2">
-              05 {"//"} DIRECT COMMS
+          <div className="glass-panel p-6 sm:p-8 md:p-10 rounded-3xl border border-neutral-200/80 shadow-clean max-w-xl w-full text-center pointer-events-auto bg-white/92 backdrop-blur-md max-h-[85dvh] sm:max-h-[90vh] overflow-y-auto">
+            {/* Joel Shibu Profile Photo */}
+            <div className="relative w-20 h-20 sm:w-28 sm:h-28 mx-auto mb-3 sm:mb-4">
+              <Image
+                src="/images/joel-shibu.jpeg"
+                alt="Joel Shibu"
+                width={112}
+                height={112}
+                className="w-full h-full rounded-full object-cover border-2 border-neutral-200 shadow-md ring-4 ring-neutral-100"
+                priority
+              />
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-neutral-900 mb-3">
-              Initiate Contact
-            </h2>
-            <p className="text-xs sm:text-sm text-neutral-500 mb-6 max-w-sm mx-auto">
-              Available for AI Systems Engineering, Robotics, and Machine Learning opportunities.
-            </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-              {/* Email */}
-              <div className="p-3.5 rounded-2xl bg-neutral-50 border border-neutral-100 flex flex-col items-center justify-between">
-                <div className="text-[10px] font-mono text-neutral-400 mb-2">EMAIL</div>
-                <div className="flex items-center space-x-1.5 w-full">
-                  <a 
-                    href={`mailto:${email}`}
-                    className="flex-1 py-1.5 px-2 rounded-lg bg-neutral-900 text-white text-[11px] font-medium text-center hover:bg-neutral-800 transition-colors"
-                  >
-                    Write
-                  </a>
-                  <button 
-                    onClick={handleCopyEmail}
-                    className="p-1.5 rounded-lg border border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50"
-                    title="Copy Email"
-                  >
-                    {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                  </button>
+            <div className="font-mono text-[11px] sm:text-xs font-bold text-sky-600 mb-1">
+              05 {"//"} GET IN TOUCH
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-neutral-900 mb-1">
+              Joel Shibu
+            </h2>
+            <p className="text-xs sm:text-sm text-neutral-600 max-w-md mx-auto mb-2">
+              AI Engineering Student · APJ Abdul Kalam Technological University
+            </p>
+            <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-[10px] sm:text-[11px] font-medium text-emerald-700 mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Seeking 2026 Internships in AI & Robotics</span>
+            </div>
+            <div className="font-mono text-[10px] sm:text-[11px] text-neutral-400 mb-4 sm:mb-5">
+              BASELIOS MATHEWS II COLLEGE OF ENGINEERING · SASTHAMCOTTA, KERALA, INDIA
+            </div>
+
+            {/* Email Quick-Copy Card */}
+            <div className="flex items-center justify-between p-3 sm:p-3.5 mb-4 sm:mb-5 rounded-2xl bg-neutral-50 border border-neutral-200/80">
+              <span className="font-mono text-xs sm:text-sm text-neutral-800 font-semibold truncate mr-2">
+                {email}
+              </span>
+              <button
+                onClick={handleCopyEmail}
+                className="flex items-center space-x-1.5 px-3 py-2 sm:py-1.5 rounded-xl bg-white border border-neutral-200 text-xs font-medium text-neutral-700 hover:bg-neutral-100 active:scale-95 transition-all shadow-sm flex-shrink-0 min-h-[36px]"
+                aria-label="Copy email to clipboard"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                    <span className="text-emerald-600 font-bold">Copied</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5" />
+                    <span>Copy</span>
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Social & Code Channels */}
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3 mb-5 sm:mb-6">
+              <a
+                href="https://www.linkedin.com/in/joel-shibu-b6bb54352/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center space-x-2 p-3 rounded-2xl bg-white border border-neutral-200/80 text-neutral-800 text-xs font-semibold hover:border-neutral-400 active:scale-95 transition-all shadow-sm group min-h-[44px]"
+              >
+                <LinkedInIcon className="w-4 h-4 text-sky-700" />
+                <span>LinkedIn</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+
+              <a
+                href="https://github.com/Joel-Shibu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center space-x-2 p-3 rounded-2xl bg-white border border-neutral-200/80 text-neutral-800 text-xs font-semibold hover:border-neutral-400 active:scale-95 transition-all shadow-sm group min-h-[44px]"
+              >
+                <GitHubIcon className="w-4 h-4 text-neutral-900" />
+                <span>GitHub</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+            </div>
+
+            {/* Verified Accreditations & Experience */}
+            <div className="pt-4 sm:pt-5 border-t border-neutral-100 text-left">
+              <div className="font-mono text-[10px] text-neutral-400 uppercase tracking-wider mb-2 sm:mb-2.5">
+                Experience & Accreditations
+              </div>
+              <div className="space-y-1.5 sm:space-y-2">
+                <div className="flex items-center space-x-2 text-xs text-neutral-700">
+                  <Briefcase className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
+                  <span>AI & Robotics Intern — STEM Robotics Internationals</span>
+                </div>
+                <div className="flex items-center space-x-2 text-xs text-neutral-700">
+                  <Award className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
+                  <span>Prompt Design in Vertex AI — Google Cloud</span>
+                </div>
+                <div className="flex items-center space-x-2 text-xs text-neutral-700">
+                  <Award className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
+                  <span>Robotics & Controls — Johnson & Johnson</span>
+                </div>
+                <div className="flex items-center space-x-2 text-xs text-neutral-700">
+                  <Award className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
+                  <span>Software Engineering — Electronic Arts</span>
                 </div>
               </div>
-
-              {/* LinkedIn */}
-              <a 
-                href="https://linkedin.com/in/joel-shibu-b6bb54352" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-3.5 rounded-2xl bg-neutral-50 border border-neutral-100 flex flex-col items-center justify-between hover:bg-neutral-100/70 transition-colors"
-              >
-                <div className="text-[10px] font-mono text-neutral-400 mb-2">LINKEDIN</div>
-                <div className="flex items-center space-x-1 text-xs font-bold text-neutral-900">
-                  <LinkedInIcon className="w-4 h-4 text-sky-600" />
-                  <span>Profile</span>
-                  <ArrowUpRight className="w-3 h-3 text-neutral-400" />
-                </div>
-              </a>
-
-              {/* GitHub */}
-              <a 
-                href="https://github.com/Joel-Shibu" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-3.5 rounded-2xl bg-neutral-50 border border-neutral-100 flex flex-col items-center justify-between hover:bg-neutral-100/70 transition-colors"
-              >
-                <div className="text-[10px] font-mono text-neutral-400 mb-2">GITHUB</div>
-                <div className="flex items-center space-x-1 text-xs font-bold text-neutral-900">
-                  <GitHubIcon className="w-4 h-4 text-neutral-900" />
-                  <span>Code</span>
-                  <ArrowUpRight className="w-3 h-3 text-neutral-400" />
-                </div>
-              </a>
-            </div>
-
-            <div className="text-[11px] font-mono text-neutral-400">
-              APJ ABDUL KALAM TECHNOLOGICAL UNIVERSITY · 2026
             </div>
           </div>
         </div>
 
-        {/* Bottom Floating Interactive Phase Jump Pills */}
-        <nav className="absolute bottom-6 z-30 flex items-center space-x-1.5 sm:space-x-2 bg-white/90 backdrop-blur-md px-3 sm:px-4 py-2 rounded-full border border-neutral-200/80 shadow-clean pointer-events-auto">
-          {["Init", "01 NeuroSight", "02 RESP-AI", "03 AirGuardian", "04 Stack", "05 Contact"].map((label, idx) => {
-            const isActive = 
-              (idx === 0 && isPhase0) ||
-              (idx === 1 && isPhase1) ||
-              (idx === 2 && isPhase2) ||
-              (idx === 3 && isPhase3) ||
-              (idx === 4 && isPhase4) ||
-              (idx === 5 && isPhase5);
-
-            return (
-              <button
-                key={label}
-                onClick={() => jumpToPhase(idx)}
-                className={`px-2.5 sm:px-3 py-1 rounded-full text-xs font-mono font-medium transition-all ${
-                  isActive 
-                    ? "bg-neutral-900 text-white shadow-sm scale-105" 
-                    : "text-neutral-500 hover:text-neutral-900"
-                }`}
-              >
-                {label.split(" ")[0]}
-              </button>
-            );
-          })}
-        </nav>
+        {/* Scroll Progress Bar at Bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-neutral-100 z-30 pointer-events-none">
+          <div 
+            className="h-full bg-neutral-900 transition-all duration-75 ease-out"
+            style={{ width: `${Math.round(scrollProgress * 100)}%` }}
+          />
+        </div>
       </div>
     </div>
   );

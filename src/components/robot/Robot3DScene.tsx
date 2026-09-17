@@ -1,107 +1,118 @@
 "use client";
 
-import { useRef, useState, useEffect, Suspense } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { ContactShadows, Float } from "@react-three/drei";
 import * as THREE from "three";
-import { RobotModel } from "./RobotModel";
+import { RobotModel, TouchPointData } from "./RobotModel";
+import { GlassConsole3D } from "./GlassConsole3D";
 
 interface Robot3DSceneProps {
-  scrollProgress: number;
+  scrollProgress: number; // 0.0 to 1.0
   className?: string;
 }
 
-interface CameraKeyframe {
-  pos: [number, number, number];
-  target: [number, number, number];
-  fov: number;
-}
-
-const CINEMATIC_CAMERA_TRACK: CameraKeyframe[] = [
-  // 0: Hero Init Frontal Wide (p = 0.00 - 0.15)
+// Documentary-style Over-The-Shoulder (OTS) & Robot POV Camera Path
+// Camera stays grounded within the robot's immediate workspace
+const POV_CAMERA_PATH = [
+  // 0: Intimate Right-OTS Hero Framing (Looking past right shoulder at glass)
   {
-    pos: [0.0, 0.6, 3.4],
-    target: [0.0, 0.55, 0.0],
-    fov: 36.0,
+    pos: new THREE.Vector3(0.48, 0.98, 1.75),
+    lookAt: new THREE.Vector3(0.12, 0.75, 0.52),
+    fov: 40,
   },
-  // 1: NeuroSight OTS Right Orbit (p = 0.15 - 0.32)
+  // 1: Right-OTS Tracking Right-Arm Leftward Swipe
   {
-    pos: [1.65, 0.95, 2.3],
-    target: [-0.4, 0.6, 0.0],
-    fov: 40.0,
+    pos: new THREE.Vector3(0.55, 1.02, 1.68),
+    lookAt: new THREE.Vector3(-0.05, 0.74, 0.52),
+    fov: 42,
   },
-  // 2: RESP-AI Low-Angle Heroic Orbit (p = 0.32 - 0.50)
+  // 2: Left-OTS Tracking Left-Arm Rightward Swipe
   {
-    pos: [-1.75, -0.25, 2.65],
-    target: [0.45, 0.7, 0.0],
-    fov: 44.0,
+    pos: new THREE.Vector3(-0.55, 1.02, 1.68),
+    lookAt: new THREE.Vector3(0.05, 0.74, 0.52),
+    fov: 42,
   },
-  // 3: AirGuardian Tactical Drone Overhead (p = 0.50 - 0.68)
+  // 3: Right-OTS Framing Left-Arm Pointing at AirGuardian (Left Panel)
   {
-    pos: [0.0, 2.75, 2.45],
-    target: [0.0, 0.25, 0.0],
-    fov: 48.0,
+    pos: new THREE.Vector3(0.36, 1.02, 1.72),
+    lookAt: new THREE.Vector3(-0.18, 0.76, 0.50),
+    fov: 42,
   },
-  // 4: Technical Arsenal 3/4 CAD View (p = 0.68 - 0.85)
+  // 4: Left-OTS Framing Right-Arm Pointing at Engineering Stack (Right Panel)
   {
-    pos: [2.1, 0.75, 2.15],
-    target: [-0.35, 0.45, 0.0],
-    fov: 38.0,
+    pos: new THREE.Vector3(-0.36, 1.02, 1.72),
+    lookAt: new THREE.Vector3(0.18, 0.76, 0.50),
+    fov: 42,
   },
-  // 5: Contact Comms Frontal Intimate Framing (p = 0.85 - 1.00)
+  // 5: Frontal Eye-Level Through-The-Glass Terminal
   {
-    pos: [0.0, 0.55, 2.8],
-    target: [0.0, 0.5, 0.0],
-    fov: 34.0,
+    pos: new THREE.Vector3(0.0, 0.92, 2.05),
+    lookAt: new THREE.Vector3(0.0, 0.78, 0.52),
+    fov: 38,
   },
 ];
 
-function CinematicCameraRig({ scrollProgress }: { scrollProgress: number }) {
-  const currentLookAt = useRef(new THREE.Vector3(0, 0.55, 0));
+function RobotPOVCameraRig({ scrollProgress }: { scrollProgress: number }) {
+  const currentLookAt = useRef(new THREE.Vector3(0.12, 0.75, 0.52));
+  const scratchTargetPos = useRef(new THREE.Vector3());
+  const scratchTargetLook = useRef(new THREE.Vector3());
 
-  useFrame(({ camera }, delta) => {
-    const totalSegments = CINEMATIC_CAMERA_TRACK.length - 1;
-    const clampedP = THREE.MathUtils.clamp(scrollProgress, 0, 1);
-    const scaled = clampedP * totalSegments;
-    const index = Math.min(Math.floor(scaled), totalSegments - 1);
-    const t = scaled - index;
+  useFrame((state, delta) => {
+    const p = Math.max(0, Math.min(1, scrollProgress));
+    const cam = state.camera;
+    const time = state.clock.getElapsedTime();
 
-    // Cubic smoothstep easing
-    const smoothT = t * t * (3 - 2 * t);
+    // Determine current camera segment
+    const nSegments = POV_CAMERA_PATH.length - 1;
+    const scaledP = p * nSegments;
+    const segmentIndex = Math.min(nSegments - 1, Math.floor(scaledP));
+    const segmentT = scaledP - segmentIndex;
 
-    const k0 = CINEMATIC_CAMERA_TRACK[index];
-    const k1 = CINEMATIC_CAMERA_TRACK[index + 1];
+    // Hermite smoothstep easing for smooth cinematic velocity
+    const easeT = segmentT * segmentT * (3.0 - 2.0 * segmentT);
 
-    // Check if mobile viewport
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-    const mobileZMultiplier = isMobile ? 1.35 : 1.0;
-    const mobileFovBoost = isMobile ? 6 : 0;
+    const from = POV_CAMERA_PATH[segmentIndex];
+    const to = POV_CAMERA_PATH[segmentIndex + 1];
 
-    // Interpolate camera position and target
-    const targetCamX = THREE.MathUtils.lerp(k0.pos[0], k1.pos[0], smoothT);
-    const targetCamY = THREE.MathUtils.lerp(k0.pos[1], k1.pos[1], smoothT);
-    const targetCamZ = THREE.MathUtils.lerp(k0.pos[2], k1.pos[2], smoothT) * mobileZMultiplier;
+    scratchTargetPos.current.lerpVectors(from.pos, to.pos, easeT);
+    scratchTargetLook.current.lerpVectors(from.lookAt, to.lookAt, easeT);
+    const targetFov = THREE.MathUtils.lerp(from.fov, to.fov, easeT);
 
-    const targetLookX = THREE.MathUtils.lerp(k0.target[0], k1.target[0], smoothT);
-    const targetLookY = THREE.MathUtils.lerp(k0.target[1], k1.target[1], smoothT);
-    const targetLookZ = THREE.MathUtils.lerp(k0.target[2], k1.target[2], smoothT);
+    // Subtle natural handheld/Steadicam breathing drift
+    const driftX = Math.sin(time * 0.9) * 0.003;
+    const driftY = Math.cos(time * 0.7) * 0.0025;
+    scratchTargetPos.current.x += driftX;
+    scratchTargetPos.current.y += driftY;
 
-    const targetFov = THREE.MathUtils.lerp(k0.fov, k1.fov, smoothT) + mobileFovBoost;
-
-    // Dampen camera motion smoothly
-    camera.position.x = THREE.MathUtils.damp(camera.position.x, targetCamX, 4.2, delta);
-    camera.position.y = THREE.MathUtils.damp(camera.position.y, targetCamY, 4.2, delta);
-    camera.position.z = THREE.MathUtils.damp(camera.position.z, targetCamZ, 4.2, delta);
-
-    currentLookAt.current.x = THREE.MathUtils.damp(currentLookAt.current.x, targetLookX, 4.8, delta);
-    currentLookAt.current.y = THREE.MathUtils.damp(currentLookAt.current.y, targetLookY, 4.8, delta);
-    currentLookAt.current.z = THREE.MathUtils.damp(currentLookAt.current.z, targetLookZ, 4.8, delta);
-    camera.lookAt(currentLookAt.current);
-
-    if (camera instanceof THREE.PerspectiveCamera) {
-      camera.fov = THREE.MathUtils.damp(camera.fov, targetFov, 3.8, delta);
-      camera.updateProjectionMatrix();
+    // Responsive adaptation based on aspect ratio & screen width
+    // Ensures robot stays proportionally framed on phones, foldables, tablets, and ultra-wide screens
+    const aspect = state.viewport.aspect;
+    if (aspect < 1.0) {
+      // Mobile portrait (e.g. 9:16 / 9:19.5): smooth pullback based on narrowness
+      const portraitPullback = (1.0 - aspect) * 1.15;
+      scratchTargetPos.current.z += 0.55 + portraitPullback;
+      scratchTargetPos.current.y += 0.08;
+      scratchTargetLook.current.y += 0.03;
+    } else if (aspect < 1.35) {
+      // Tablet portrait / iPad / Square foldables:
+      scratchTargetPos.current.z += 0.28;
     }
+
+    // Critically damped camera tracking (smooth, no abrupt snapping)
+    cam.position.x = THREE.MathUtils.damp(cam.position.x, scratchTargetPos.current.x, 8, delta);
+    cam.position.y = THREE.MathUtils.damp(cam.position.y, scratchTargetPos.current.y, 8, delta);
+    cam.position.z = THREE.MathUtils.damp(cam.position.z, scratchTargetPos.current.z, 8, delta);
+
+    currentLookAt.current.x = THREE.MathUtils.damp(currentLookAt.current.x, scratchTargetLook.current.x, 8, delta);
+    currentLookAt.current.y = THREE.MathUtils.damp(currentLookAt.current.y, scratchTargetLook.current.y, 8, delta);
+    currentLookAt.current.z = THREE.MathUtils.damp(currentLookAt.current.z, scratchTargetLook.current.z, 8, delta);
+
+    if (cam instanceof THREE.PerspectiveCamera) {
+      cam.fov = THREE.MathUtils.damp(cam.fov, targetFov, 6, delta);
+      cam.updateProjectionMatrix();
+    }
+
+    cam.lookAt(currentLookAt.current);
   });
 
   return null;
@@ -109,11 +120,22 @@ function CinematicCameraRig({ scrollProgress }: { scrollProgress: number }) {
 
 export function Robot3DScene({ scrollProgress, className = "" }: Robot3DSceneProps) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [touchPoint, setTouchPoint] = useState<TouchPointData>({
+    x: 0,
+    y: 0,
+    z: 0.6,
+    active: false,
+    intensity: 0,
+  });
 
   useEffect(() => {
+    // Only listen for mousemove if pointer is fine (desktop/laptop)
+    if (typeof window === "undefined") return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = (e.clientY / window.innerHeight) * 2 - 1;
+      const y = -(e.clientY / window.innerHeight) * 2 + 1;
       setMousePos({ x, y });
     };
 
@@ -122,70 +144,76 @@ export function Robot3DScene({ scrollProgress, className = "" }: Robot3DScenePro
   }, []);
 
   return (
-    <div className={`relative w-full h-full pointer-events-none ${className}`}>
+    <div className={`relative w-full h-full ${className}`}>
       <Canvas
-        camera={{ position: [0, 0.6, 3.4], fov: 36 }}
-        dpr={[1, 2]}
+        shadows
+        dpr={[1, 1.8]} // Clamps DPR between 1 and 1.8 to prevent mobile GPU throttling
         gl={{
           antialias: true,
           alpha: true,
           powerPreference: "high-performance",
+          stencil: false,
+          depth: true,
         }}
-        shadows
-        style={{ pointerEvents: "auto" }}
+        camera={{ position: [0.42, 0.95, 1.45], fov: 40 }}
+        className="w-full h-full"
       >
-        <Suspense fallback={null}>
-          <CinematicCameraRig scrollProgress={scrollProgress} />
+        {/* Soft Ambient Studio Illumination */}
+        <ambientLight intensity={1.3} />
+        
+        {/* Key Light: High softbox overhead casting soft grounding shadow */}
+        <directionalLight
+          position={[2.5, 4.5, 3.0]}
+          intensity={1.9}
+          castShadow
+          shadow-mapSize-width={1024}
+          shadow-mapSize-height={1024}
+          shadow-camera-near={0.5}
+          shadow-camera-far={10}
+          shadow-camera-left={-2.5}
+          shadow-camera-right={2.5}
+          shadow-camera-top={2.5}
+          shadow-camera-bottom={-2.5}
+        />
 
-          {/* Studio Key & Rim Lighting */}
-          <ambientLight intensity={1.5} />
-          
-          {/* Main Key Light */}
-          <directionalLight
-            position={[-4, 8, 6]}
-            intensity={2.6}
-            castShadow
-            shadow-mapSize={[1024, 1024]}
-            shadow-bias={-0.0001}
+        {/* Rim Light: Cool titanium edge definition */}
+        <directionalLight position={[-2.5, 3.5, -1.5]} intensity={1.4} color="#E0F2FE" />
+        
+        {/* Fill Light: Soft white studio bounce */}
+        <directionalLight position={[0, -2, 2]} intensity={0.6} color="#FFFFFF" />
+
+        {/* Dynamic Screen Bounce Light (illuminates robot fingers and wrist on contact) */}
+        {touchPoint.active && (
+          <pointLight
+            position={[touchPoint.x, touchPoint.y, touchPoint.z + 0.08]}
+            color="#38BDF8"
+            intensity={2.2 * touchPoint.intensity}
+            distance={0.9}
+            decay={2}
           />
+        )}
 
-          {/* Specular White Fill Light */}
-          <directionalLight
-            position={[6, 5, 4]}
-            intensity={1.8}
-            color="#FFFFFF"
-          />
+        {/* Realistic Over-The-Shoulder / Robot POV Camera Rig */}
+        <RobotPOVCameraRig scrollProgress={scrollProgress} />
 
-          {/* Ice-Blue Rim Backlight */}
-          <directionalLight
-            position={[0, -2, -4]}
-            intensity={1.4}
-            color="#0EA5E9"
-          />
+        {/* The Central Dynamic 3D Humanoid Robot */}
+        <RobotModel
+          scrollProgress={scrollProgress}
+          mousePosition={mousePos}
+          onTouchPointChange={setTouchPoint}
+        />
 
-          {/* Floating Robot Actor */}
-          <Float
-            speed={2}
-            rotationIntensity={0.15}
-            floatIntensity={0.2}
-            floatingRange={[-0.04, 0.04]}
-          >
-            <RobotModel
-              scrollProgress={scrollProgress}
-              mousePosition={mousePos}
-            />
-          </Float>
+        {/* Curved 3D Transparent Glass Holographic Console */}
+        <GlassConsole3D
+          scrollProgress={scrollProgress}
+          touchPoint={touchPoint}
+        />
 
-          {/* Studio Contact Shadow */}
-          <ContactShadows
-            position={[0, -1.35, 0]}
-            opacity={0.35}
-            scale={6}
-            blur={2.4}
-            far={4.5}
-            color="#09090B"
-          />
-        </Suspense>
+        {/* Studio Floor with Soft Grounding Contact Shadow */}
+        <mesh position={[0, -1.0, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+          <planeGeometry args={[20, 20]} />
+          <shadowMaterial opacity={0.12} />
+        </mesh>
       </Canvas>
     </div>
   );

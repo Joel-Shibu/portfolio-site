@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# heavy assets & logs
+/public/images/robot_frames
+/public/videos
+/scripts
+dev.log
+hero_screenshot.png
+mission_screenshot.png

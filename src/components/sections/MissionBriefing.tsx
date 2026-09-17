@@ -171,7 +171,7 @@ export default function MissionBriefing({ missionId, onBack }: MissionBriefingPr
           >
             <div className="flex items-center gap-6 mb-8">
               <span className="font-mono text-sm tracking-[0.4em] uppercase" style={{ color: mission.color }}>
-                {mission.id} // ACTIVE
+                {mission.id} {"//"} ACTIVE
               </span>
             </div>
             

@@ -114,7 +114,7 @@ export default function MissionSelect({ onMissionSelect }: { onMissionSelect?: (
               
               <div className="text-left max-w-3xl mix-blend-exclusion mb-8 md:mb-0">
                 <p className="font-mono text-lg tracking-[0.3em] mb-4" style={{ color: mission.color }}>
-                  [ 0{index + 1} // {mission.id.toUpperCase()} ]
+                  [ 0{index + 1} {"//"} {mission.id.toUpperCase()} ]
                 </p>
                 <h3 className="font-display text-[8vw] md:text-[6vw] font-black leading-[0.85] text-white uppercase mb-6 tracking-tighter">
                   {mission.title}

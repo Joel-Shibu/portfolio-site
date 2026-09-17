@@ -10,8 +10,8 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
-  title: "Joel Shibu | AI Systems Engineer",
-  description: "Building Next-Generation AI Systems",
+  title: "Joel Shibu — AI Systems Engineer & Robotics Developer",
+  description: "High-performance AI systems, real-time ML pipelines, and autonomous robotics architecture.",
 };
 
 export default function RootLayout({
@@ -20,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}>
+    <html lang="en" className="light" style={{ colorScheme: "light" }}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground selection:bg-neutral-900 selection:text-white`}>
         <CustomCursor />
         <SmoothScrolling>
           <GSAPInitializer>{children}</GSAPInitializer>

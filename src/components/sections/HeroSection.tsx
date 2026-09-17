@@ -3,89 +3,148 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
+import { ArrowDown, Sparkles, Terminal } from "lucide-react";
 
-interface HeroSectionProps {
-  onMissionSelect?: (id: string) => void;
-}
-
-export default function HeroSection({ onMissionSelect }: HeroSectionProps) {
+export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const imageWrapperRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
-  const textRef = useRef<HTMLHeadingElement>(null);
-  const subtextRef = useRef<HTMLDivElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const metaRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "+=200%", // Pin for 200% of viewport height
-        scrub: 1.5, // Smooth scrubbing
-        pin: true,
-      }
-    });
-
-    // Zoom the image dramatically and darken it
-    tl.to(imageRef.current, {
-      scale: 1.8,
-      transformOrigin: "center center",
-      ease: "power2.inOut"
-    }, 0);
-
-    tl.to(overlayRef.current, {
-      opacity: 0.9,
-      ease: "power2.inOut"
-    }, 0);
-
-    // Text spreads / fades and moves up
-    tl.to(textRef.current, {
-      scale: 1.3,
+    tl.from(badgeRef.current, {
       opacity: 0,
-      y: -150,
-      ease: "power2.inOut"
-    }, 0);
-
-    tl.to(subtextRef.current, {
-      opacity: 0,
-      y: 100,
-      ease: "power2.inOut"
-    }, 0);
-
+      y: 20,
+      duration: 0.8,
+    })
+      .from(
+        titleRef.current,
+        {
+          opacity: 0,
+          y: 40,
+          scale: 0.98,
+          duration: 1,
+        },
+        "-=0.5"
+      )
+      .from(
+        descRef.current,
+        {
+          opacity: 0,
+          y: 20,
+          duration: 0.8,
+        },
+        "-=0.6"
+      )
+      .from(
+        ctaRef.current,
+        {
+          opacity: 0,
+          y: 20,
+          duration: 0.8,
+        },
+        "-=0.6"
+      )
+      .from(
+        metaRef.current,
+        {
+          opacity: 0,
+          duration: 1,
+        },
+        "-=0.4"
+      );
   }, { scope: containerRef });
 
+  const scrollToMissions = () => {
+    const el = document.getElementById("missions");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToContact = () => {
+    const el = document.getElementById("contact");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section ref={containerRef} className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center">
-      {/* Cinematic Background Image */}
-      <div 
-        ref={imageWrapperRef}
-        className="absolute inset-0 w-full h-full will-change-transform"
-      >
-        <img 
-          ref={imageRef}
-          src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2500&auto=format&fit=crop" 
-          alt="Cinematic AI Robot" 
-          className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-[2000ms] cursor-default"
-        />
-        {/* Film grain and dark overlay */}
-        <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png')] opacity-20 mix-blend-overlay pointer-events-none" />
-        <div ref={overlayRef} className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black opacity-60 pointer-events-none" />
+    <section 
+      ref={containerRef} 
+      id="hero"
+      className="relative w-full min-h-screen flex flex-col justify-between pt-32 pb-12 px-6 md:px-12 bg-white overflow-hidden"
+    >
+      {/* Precision Geometric Grid Background */}
+      <div className="absolute inset-0 bg-grid-light pointer-events-none opacity-80" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-radial-gradient pointer-events-none blur-3xl opacity-70" />
+
+      {/* Top Floating Status Meta */}
+      <div ref={metaRef} className="relative z-10 flex flex-wrap items-center justify-between gap-4 border-b border-neutral-100 pb-6 text-xs font-mono text-neutral-400">
+        <div className="flex items-center space-x-2">
+          <Terminal className="w-3.5 h-3.5 text-neutral-500" />
+          <span>SPEC: ARCHITECTURAL_WHITE // SYSTEM_V2.6</span>
+        </div>
+        <div className="flex items-center space-x-6">
+          <span>LAT/LONG: 09.9312° N, 76.2673° E</span>
+          <span className="hidden sm:inline">APJ ABDUL KALAM TECHNOLOGICAL UNIV</span>
+        </div>
       </div>
 
-      {/* Foreground Typography */}
-      <div className="relative z-10 text-center pointer-events-none mix-blend-exclusion">
-        <h1 ref={textRef} className="text-[12vw] font-black tracking-tighter text-white leading-[0.8] whitespace-nowrap will-change-transform">
-          JOEL<br/>SHIBU
+      {/* Center Stage Typographic Monument */}
+      <div className="relative z-10 max-w-5xl mx-auto my-auto text-center py-12">
+        {/* Sub-badge */}
+        <div ref={badgeRef} className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-neutral-100/90 border border-neutral-200/80 text-xs font-mono text-neutral-700 mb-8 shadow-sm">
+          <Sparkles className="w-3.5 h-3.5 text-sky-500" />
+          <span>AI SYSTEMS & AUTONOMOUS ROBOTICS</span>
+        </div>
+
+        {/* Headline */}
+        <h1 
+          ref={titleRef} 
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight text-neutral-900 leading-[0.9] mb-8 select-none"
+        >
+          JOEL SHIBU
         </h1>
-        <div ref={subtextRef} className="mt-8 flex flex-col items-center will-change-transform">
-          <p className="font-mono text-xl md:text-2xl tracking-[0.5em] text-[#00FF88]">AI OPERATIVE</p>
-          <div className="w-px h-32 bg-gradient-to-b from-[#00FF88] to-transparent mt-8" />
-          <p className="font-mono text-xs text-white/50 tracking-widest mt-4">SCROLL TO INITIATE</p>
+
+        {/* Narrative description */}
+        <p 
+          ref={descRef} 
+          className="text-neutral-500 text-base sm:text-lg md:text-xl font-normal max-w-2xl mx-auto leading-relaxed mb-10"
+        >
+          Architecting scalable artificial intelligence systems, real-time edge neural pipelines, and autonomous robotic navigation with surgical engineering rigor.
+        </p>
+
+        {/* Action CTAs */}
+        <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onClick={scrollToMissions}
+            className="w-full sm:w-auto inline-flex items-center justify-center space-x-2.5 px-7 py-3.5 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white text-sm font-medium tracking-wide shadow-clean transition-all duration-200 hover:scale-[1.02]"
+          >
+            <span>Explore 3D Robot Showcase</span>
+            <ArrowDown className="w-4 h-4 animate-bounce" />
+          </button>
+
+          <button
+            onClick={scrollToContact}
+            className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-full bg-white hover:bg-neutral-50 text-neutral-800 border border-neutral-200 text-sm font-medium tracking-wide transition-all duration-200 shadow-sm"
+          >
+            <span>Direct Transmission</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Bottom Scroll Cue */}
+      <div className="relative z-10 flex flex-col items-center justify-center pt-8">
+        <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">
+          SCROLL TO INITIATE 3D ROBOT SWIPE
+        </span>
+        <div className="w-5 h-8 rounded-full border border-neutral-300 flex items-start justify-center p-1">
+          <div className="w-1 h-2 rounded-full bg-neutral-900 animate-bounce" />
         </div>
       </div>
     </section>

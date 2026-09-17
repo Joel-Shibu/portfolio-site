@@ -32,14 +32,14 @@ export default function CustomCursor() {
     // Add hover states
     const addHoverState = () => {
       gsap.to(cursor, {
-        scale: 3,
-        backgroundColor: "rgba(0, 255, 136, 0.1)",
-        borderColor: "rgba(0, 255, 136, 0)",
-        duration: 0.3,
+        scale: 2.2,
+        backgroundColor: "rgba(0, 0, 0, 0.05)",
+        borderColor: "rgba(0, 0, 0, 0.3)",
+        duration: 0.25,
       });
       gsap.to(dot, {
         scale: 0,
-        duration: 0.3,
+        duration: 0.25,
       });
     };
 
@@ -47,12 +47,12 @@ export default function CustomCursor() {
       gsap.to(cursor, {
         scale: 1,
         backgroundColor: "transparent",
-        borderColor: "rgba(255, 255, 255, 0.5)",
-        duration: 0.3,
+        borderColor: "rgba(0, 0, 0, 0.2)",
+        duration: 0.25,
       });
       gsap.to(dot, {
         scale: 1,
-        duration: 0.3,
+        duration: 0.25,
       });
     };
 

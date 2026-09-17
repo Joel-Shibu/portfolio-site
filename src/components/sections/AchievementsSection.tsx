@@ -37,7 +37,7 @@ export default function AchievementsSection() {
 
     const cards = gsap.utils.toArray('.achievement-card');
     
-    cards.forEach((card: any, i) => {
+    (cards as HTMLElement[]).forEach((card, i) => {
       gsap.fromTo(card,
         { opacity: 0, y: 50 },
         {

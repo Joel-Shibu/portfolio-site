@@ -1,50 +1,38 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { registerGSAP } from "@/lib/animations/gsap-setup";
+import { Navbar } from "@/components/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
-import MissionSelect from "@/components/sections/MissionSelect";
-import MissionBriefing from "@/components/sections/MissionBriefing";
+import { RobotScrollytelling } from "@/components/robot/RobotScrollytelling";
 import SkillsSection from "@/components/sections/SkillsSection";
 import AboutSection from "@/components/sections/AboutSection";
 import ContactSection from "@/components/sections/ContactSection";
-import AchievementsSection from "@/components/sections/AchievementsSection";
 
 export default function Home() {
-  const [selectedMission, setSelectedMission] = useState<string | null>(null);
-
   useEffect(() => {
     registerGSAP();
   }, []);
 
-  const handleMissionSelect = (missionId: string) => {
-    setSelectedMission(missionId);
-  };
-
-  const handleBack = () => {
-    setSelectedMission(null);
-    setTimeout(() => {
-      const el = document.getElementById("missions");
-      if (el) {
-        el.scrollIntoView({ behavior: "instant" });
-      }
-    }, 100);
-  };
-
   return (
-    <main className="relative bg-background min-h-screen selection:bg-primary/30 selection:text-primary">
-      {selectedMission ? (
-        <MissionBriefing missionId={selectedMission} onBack={handleBack} />
-      ) : (
-        <>
-          <HeroSection onMissionSelect={handleMissionSelect} />
-          <MissionSelect onMissionSelect={handleMissionSelect} />
-          <SkillsSection />
-          <AboutSection />
-          <ContactSection />
-          <AchievementsSection />
-        </>
-      )}
+    <main className="relative min-h-screen bg-white text-neutral-900 selection:bg-neutral-900 selection:text-white">
+      {/* Floating Modern Frosted Glass Navigation Bar */}
+      <Navbar />
+
+      {/* Modern White Architectural Hero */}
+      <HeroSection />
+
+      {/* Centerpiece: Pinned 3D Robot Swiping Scrollytelling Showcase */}
+      <RobotScrollytelling />
+
+      {/* Technical Arsenal / Capabilities Bento Grid */}
+      <SkillsSection />
+
+      {/* Biographical Dossier & Engineering Accreditations */}
+      <AboutSection />
+
+      {/* Direct Transmission & Comms Center */}
+      <ContactSection />
     </main>
   );
 }

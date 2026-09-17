@@ -51,9 +51,9 @@ Docker · GCP · Firebase · GitHub Actions · Linux
 
 ## 📊 GitHub Stats
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=Joel-Shibu&theme=transparent&hide_border=true&title_color=1f2937&text_color=374151&icon_color=1f2937&ring_color=374151)
+![GitHub Stats](https://github-stats-extended.vercel.app/api?username=Joel-Shibu&theme=transparent&hide_border=true&title_color=1f2937&text_color=374151&icon_color=1f2937&ring_color=374151)
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Joel-Shibu&theme=transparent&hide_border=true&title_color=1f2937&text_color=374151&icon_color=1f2937&layout=compact)
+![Top Languages](https://github-stats-extended.vercel.app/api/top-langs/?username=Joel-Shibu&theme=transparent&hide_border=true&title_color=1f2937&text_color=374151&icon_color=1f2937&layout=compact)
 
 ---
 

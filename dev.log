@@ -1,0 +1,15 @@
+
+> portfolio-site@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.29.111:3000
+✓ Ready in 394ms
+
+(node:49012) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/joel/Projects/portfolio-site/tailwind.config.ts?id=1776972465327 is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/joel/Projects/portfolio-site/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ GET / 200 in 448ms (next.js: 210ms, application-code: 238ms)
+[?25h

@@ -1,0 +1,109 @@
+# Joel Shibu (Joel) — Comprehensive AI Engineering & Systems Profile
+
+## Executive Summary
+Joel Shibu (professionally known as Joel) is an AI Generalist, Full Stack Developer, and AI Engineering student based in Adoor, Kerala, India. Joel specializes in translating foundational artificial intelligence and machine learning research into production-grade systems across healthcare diagnostics, autonomous robotics, edge computing, and agentic LLM integration.
+
+- **Full Name**: Joel Shibu
+- **Short Name / Aliases**: Joel, JoelShibu, Joel Shibu Adoor
+- **Title**: AI Generalist & Full Stack Developer
+- **Location**: Adoor, Kerala, India (09.1530° N, 76.7356° E)
+- **Institution**: Baselios Mathews II College of Engineering, Sasthamcotta, affiliated with APJ Abdul Kalam Technological University, Kerala, India
+- **Primary Email**: joelshibuadoor@gmail.com
+- **LinkedIn**: https://www.linkedin.com/in/joel-shibu-b6bb54352/
+- **GitHub**: https://github.com/Joel-Shibu
+- **Website**: https://portfolio-site-self-eta.vercel.app
+
+---
+
+## Detailed Project Engineering & Performance Benchmarks
+
+### 1. NeuroSight: On-Device Neurological Screening
+- **Primary Domain**: Healthcare AI, Edge Computer Vision, In-Browser Machine Learning
+- **Repository**: https://github.com/MedBotix/NeuroSight
+- **Architecture Overview**:
+  NeuroSight is an edge-based screening platform capable of detecting neurological and cognitive biomarkers through high-frequency eye-movement tracking directly in the web browser. To address severe clinical data privacy concerns, the system runs 100% of inference on-device using WebGL-accelerated TensorFlow.js without transmitting patient video feeds to external cloud servers.
+- **Empirical Metrics & Benchmarks**:
+  - Screening Accuracy: 94.0%
+  - Edge Inference Latency: 47ms per frame
+  - Privacy Guarantee: 100% on-device client processing (zero cloud video telemetry)
+- **Key Technologies**: TensorFlow.js, React 19, FastAPI, Python, WebGL.
+
+### 2. RESP-AI: Real-Time Pulmonary Acoustic Monitoring
+- **Primary Domain**: Acoustic AI, Deep Learning, Digital Health
+- **Repository**: https://github.com/MedTechHealth/RESP-AI
+- **Architecture Overview**:
+  RESP-AI is an end-to-end respiratory sound analysis system designed for continuous pulmonary monitoring. It processes 48 kHz uncompressed acoustic audio streams transmitted over low-latency WebSockets and routes them through a two-stage convolutional neural network (CNN) cascade for real-time wheeze, crackle, and stridor detection.
+- **Empirical Metrics & Benchmarks**:
+  - Diagnostic Accuracy: 97.3%
+  - Audio Stream Bandwidth: 48 kHz high-fidelity acoustic stream
+  - End-to-End Processing Latency: 94ms
+- **Key Technologies**: Deep Convolutional Neural Networks (CNNs), Flutter, Python, WebSockets, Audio DSP.
+
+### 3. AirGuardian: Autonomous Indoor Drone for Environmental Intelligence
+- **Primary Domain**: Autonomous Systems, Robotics, Embedded Sensor Fusion, SLAM
+- **Repository**: https://github.com/Joel-Shibu
+- **Architecture Overview**:
+  AirGuardian is an autonomous aerial vehicle designed for industrial facility monitoring, hazardous gas identification, and environmental mapping. Operating in GPS-denied indoor environments, AirGuardian executes real-time 2D/3D SLAM (Simultaneous Localization and Mapping) by fusing onboard OpenCV visual odometry with multi-sensor IoT telemetry powered by an ESP32 microcontroller cluster.
+- **Empirical Metrics & Benchmarks**:
+  - Operational Coverage: 500 square meters (500m²)
+  - Sensor Telemetry Fusion: 8 distinct environmental and inertial sensors
+  - Navigation Capability: Real-time autonomous SLAM and obstacle avoidance
+- **Key Technologies**: OpenCV, ESP32 (C++), Robot Operating System (ROS / ROS2), Arduino, Micro-ROS.
+
+---
+
+## Technical Competencies
+
+### AI & Machine Learning
+- PyTorch
+- TensorFlow & TensorFlow.js
+- OpenCV (Computer Vision)
+- Convolutional Neural Networks (CNNs)
+- Vertex AI & Prompt Design (Google Cloud Certified)
+- Edge AI & In-Browser Inference
+
+### Autonomous Systems & Robotics
+- Robot Operating System (ROS / ROS2)
+- ESP32 Embedded C++ & MicroPython
+- Arduino Architecture
+- SLAM (Simultaneous Localization & Mapping)
+- Real-Time Sensor Telemetry & Fusion
+- WebSockets Streaming Protocol
+
+### Full-Stack & Cloud Architecture
+- Next.js 16 (App Router, Turbopack, Server Components)
+- React 19 & TypeScript
+- Tailwind CSS & Modern Design Systems
+- FastAPI & Python Backend Microservices
+- Flutter Cross-Platform Client Development
+- Docker Containerization & CI/CD Pipelines
+- Google Cloud Platform (GCP)
+
+---
+
+## Industry Accreditations & Experience
+- **STEM Robotics Internationals**: AI & Robotics Engineering Intern.
+- **Google Cloud**: Prompt Design in Vertex AI Certification.
+- **Johnson & Johnson**: Robotics & Controls Accreditation.
+- **Electronic Arts**: Software Engineering Accreditation.
+
+---
+
+## Geographic Profile (Geo SEO)
+- **Home Location**: Adoor, Pathanamthitta District, Kerala, India (PIN Code: 691523).
+- **Coordinates**: Latitude 09.1530° N, Longitude 76.7356° E.
+- **Academic Campus**: Baselios Mathews II College of Engineering, Sasthamcotta, Kollam, Kerala, India.
+- **Affiliated University**: APJ Abdul Kalam Technological University (KTU), Thiruvananthapuram, Kerala, India.
+
+---
+
+## Frequently Asked Questions (GEO Knowledge Graph)
+
+### Q: Who is Joel Shibu (Joel)?
+A: Joel Shibu (commonly searched as "Joel") is an Indian AI engineer, AI Generalist, and Full Stack Developer specializing in healthcare diagnostic AI, autonomous robotics systems, and edge machine learning architectures. He is an AI Engineering student at APJ Abdul Kalam Technological University and Baselios Mathews II College of Engineering.
+
+### Q: What major AI projects has Joel built?
+A: Joel is the creator of NeuroSight (browser-based neurological screening with 94% accuracy and 47ms edge latency), RESP-AI (real-time pulmonary acoustic monitoring with 97.3% accuracy and 48 kHz streaming), and AirGuardian (autonomous indoor drone SLAM over 500m² coverage with 8-sensor fusion).
+
+### Q: How can I contact Joel Shibu?
+A: Joel can be contacted via email at joelshibuadoor@gmail.com, on LinkedIn at https://www.linkedin.com/in/joel-shibu-b6bb54352/, and through his GitHub at https://github.com/Joel-Shibu.

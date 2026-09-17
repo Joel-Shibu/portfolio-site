@@ -1,0 +1,245 @@
+- main [ref=e2]:
+  - generic [ref=e4]:
+    - img "Cinematic AI Robot" [ref=e6]
+    - generic:
+      - heading "JOEL SHIBU" [level=1]:
+        - text: JOEL
+        - text: SHIBU
+      - generic:
+        - paragraph: AI OPERATIVE
+        - paragraph: SCROLL TO INITIATE
+  - generic [ref=e8]:
+    - generic:
+      - heading "MISSIONS ARCHIVE" [level=2]
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - img "NEUROSIGHT" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]:
+            - paragraph [ref=e16]: "[ 01 // NEUROSIGHT ]"
+            - heading "NEUROSIGHT" [level=3] [ref=e17]
+            - paragraph [ref=e18]: Healthcare AI / Brain-Computer Interface
+            - generic [ref=e19]:
+              - generic [ref=e20]: TensorFlow.js
+              - generic [ref=e21]: React
+              - generic [ref=e22]: FastAPI
+          - button "ENTER" [ref=e24]:
+            - generic [ref=e25]: ENTER
+      - generic [ref=e26]:
+        - img "RESP-AI" [ref=e29]
+        - generic [ref=e30]:
+          - generic [ref=e31]:
+            - paragraph [ref=e32]: "[ 02 // RESP-AI ]"
+            - heading "RESP-AI" [level=3] [ref=e33]
+            - paragraph [ref=e34]: Real-Time Respiratory Monitoring
+            - generic [ref=e35]:
+              - generic [ref=e36]: Flutter
+              - generic [ref=e37]: CNN
+              - generic [ref=e38]: Python
+          - button "ENTER" [ref=e40]:
+            - generic [ref=e41]: ENTER
+      - generic [ref=e42]:
+        - img "AIRGUARDIAN" [ref=e45]
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - paragraph [ref=e48]: "[ 03 // AIRGUARDIAN ]"
+            - heading "AIRGUARDIAN" [level=3] [ref=e49]
+            - paragraph [ref=e50]: Autonomous Drone Systems
+            - generic [ref=e51]:
+              - generic [ref=e52]: Python
+              - generic [ref=e53]: OpenCV
+              - generic [ref=e54]: INAV
+          - button "ENTER" [ref=e56]:
+            - generic [ref=e57]: ENTER
+  - generic [ref=e59]:
+    - generic [ref=e60]:
+      - heading "SKILLS UNLOCKED" [level=2] [ref=e61]
+      - paragraph [ref=e62]: "[ ABILITY GRID - LEVEL UP YOUR KNOWLEDGE ]"
+    - generic [ref=e64]:
+      - generic [ref=e65]: "[ ULTIMATE ]"
+      - heading "LLM ORCHESTRATION" [level=3] [ref=e66]
+      - paragraph [ref=e67]: Multi-agent systems & tool orchestration
+    - generic [ref=e68]:
+      - generic [ref=e69]:
+        - heading "AGENTIC AI" [level=3] [ref=e71]
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - generic [ref=e74]:
+              - generic [ref=e75]: Prompt Engineering
+              - generic [ref=e76]: 90%
+            - paragraph [ref=e78]: Vertex AI certified
+          - generic [ref=e79]:
+            - generic [ref=e80]:
+              - generic [ref=e81]: Multi-Agent Systems
+              - generic [ref=e82]: 85%
+            - paragraph [ref=e84]: LLM orchestration
+          - generic [ref=e85]:
+            - generic [ref=e86]:
+              - generic [ref=e87]: Tool Use
+              - generic [ref=e88]: 80%
+            - paragraph [ref=e90]: Function calling
+      - generic [ref=e91]:
+        - heading "HEALTHCARE ML" [level=3] [ref=e93]
+        - generic [ref=e94]:
+          - generic [ref=e95]:
+            - generic [ref=e96]:
+              - generic [ref=e97]: TensorFlow.js
+              - generic [ref=e98]: 92%
+            - paragraph [ref=e100]: Browser ML
+          - generic [ref=e101]:
+            - generic [ref=e102]:
+              - generic [ref=e103]: CNNs
+              - generic [ref=e104]: 88%
+            - paragraph [ref=e106]: Deep learning
+          - generic [ref=e107]:
+            - generic [ref=e108]:
+              - generic [ref=e109]: On-Device Inference
+              - generic [ref=e110]: 85%
+            - paragraph [ref=e112]: Privacy-first
+      - generic [ref=e113]:
+        - heading "AUTONOMOUS SYS" [level=3] [ref=e115]
+        - generic [ref=e116]:
+          - generic [ref=e117]:
+            - generic [ref=e118]:
+              - generic [ref=e119]: ROS
+              - generic [ref=e120]: 75%
+            - paragraph [ref=e122]: Robot OS
+          - generic [ref=e123]:
+            - generic [ref=e124]:
+              - generic [ref=e125]: IoT Integration
+              - generic [ref=e126]: 82%
+            - paragraph [ref=e128]: ESP32, sensors
+          - generic [ref=e129]:
+            - generic [ref=e130]:
+              - generic [ref=e131]: Computer Vision
+              - generic [ref=e132]: 80%
+            - paragraph [ref=e134]: OpenCV
+    - generic [ref=e135]:
+      - heading "[ PRODUCTION TOOLS ]" [level=3] [ref=e136]
+      - generic [ref=e137]:
+        - generic [ref=e138]: Docker
+        - generic [ref=e139]: FastAPI
+        - generic [ref=e140]: WebSocket
+        - generic [ref=e141]: Real-time ML
+        - generic [ref=e142]: React
+        - generic [ref=e143]: Flutter
+        - generic [ref=e144]: GCP
+        - generic [ref=e145]: CI/CD
+  - generic [ref=e147]:
+    - generic [ref=e148]:
+      - heading "PERSONNEL FILE" [level=2] [ref=e149]
+      - paragraph [ref=e150]: "[ CLASSIFIED - CLEARANCE LEVEL 5 ]"
+    - generic [ref=e151]:
+      - generic [ref=e153]:
+        - generic [ref=e156]: 👨‍💻
+        - generic [ref=e161]:
+          - generic [ref=e162]:
+            - generic [ref=e163]: "NAME:"
+            - generic [ref=e164]: JOEL SHIBU
+          - generic [ref=e165]:
+            - generic [ref=e166]: "ROLE:"
+            - generic [ref=e167]: AI SYSTEMS ENGINEER
+          - generic [ref=e168]:
+            - generic [ref=e169]: "CLEARANCE:"
+            - generic [ref=e170]: ENGINEER LEVEL 5
+          - generic [ref=e171]:
+            - generic [ref=e172]: "LOCATION:"
+            - generic [ref=e173]: Adoor, Kerala, India
+      - generic [ref=e174]:
+        - generic [ref=e175]:
+          - heading "[ CHARACTER STATS ]" [level=3] [ref=e176]
+          - generic [ref=e177]:
+            - generic [ref=e179]:
+              - generic [ref=e180]: intelligence
+              - generic [ref=e181]: "85"
+            - generic [ref=e184]:
+              - generic [ref=e185]: creativity
+              - generic [ref=e186]: "70"
+            - generic [ref=e189]:
+              - generic [ref=e190]: leadership
+              - generic [ref=e191]: "80"
+            - generic [ref=e194]:
+              - generic [ref=e195]: technical
+              - generic [ref=e196]: "95"
+        - generic [ref=e198]:
+          - heading "[ CERTIFICATIONS ]" [level=3] [ref=e199]
+          - generic [ref=e200]:
+            - generic [ref=e201]:
+              - generic [ref=e203]: ✓
+              - generic [ref=e204]:
+                - generic [ref=e205]: Google Cloud
+                - generic [ref=e206]: — Prompt Design
+            - generic [ref=e207]:
+              - generic [ref=e209]: ✓
+              - generic [ref=e210]:
+                - generic [ref=e211]: Johnson & Johnson
+                - generic [ref=e212]: — Robotics & Controls
+            - generic [ref=e213]:
+              - generic [ref=e215]: ✓
+              - generic [ref=e216]:
+                - generic [ref=e217]: Electronic Arts
+                - generic [ref=e218]: — Software Engineering
+  - generic [ref=e219]:
+    - generic [ref=e220]:
+      - heading "COMMUNICATION CONSOLE" [level=2] [ref=e221]
+      - paragraph [ref=e222]: "[ ESTABLISHING CONNECTION... ]"
+    - generic [ref=e229]: 📡
+    - paragraph [ref=e230]: AWAITING RESPONSE...
+    - generic [ref=e232]:
+      - link "📧 OPEN COMM LINK Direct Email" [ref=e233] [cursor=pointer]:
+        - /url: mailto:joelshibuadoor@email.com
+        - generic [ref=e235]:
+          - generic [ref=e236]: 📧
+          - generic [ref=e237]: OPEN COMM LINK
+          - generic [ref=e238]: Direct Email
+      - link "💼 SYNC PROFILE LinkedIn" [ref=e240] [cursor=pointer]:
+        - /url: https://linkedin.com/in/joel-shibu-b6bb54352
+        - generic [ref=e242]:
+          - generic [ref=e243]: 💼
+          - generic [ref=e244]: SYNC PROFILE
+          - generic [ref=e245]: LinkedIn
+      - link "💻 ACCESS REPO GitHub" [ref=e247] [cursor=pointer]:
+        - /url: https://github.com/Joel-Shibu
+        - generic [ref=e249]:
+          - generic [ref=e250]: 💻
+          - generic [ref=e251]: ACCESS REPO
+          - generic [ref=e252]: GitHub
+      - link "📄 DOWNLOAD DOSSIER Resume PDF" [ref=e254] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e256]:
+          - generic [ref=e257]: 📄
+          - generic [ref=e258]: DOWNLOAD DOSSIER
+          - generic [ref=e259]: Resume PDF
+    - paragraph [ref=e262]: © 2026 JOEL SHIBU // ALL RIGHTS RESERVED
+  - generic [ref=e263]:
+    - generic [ref=e264]:
+      - generic [ref=e265]: 🎉
+      - heading "MISSION COMPLETE" [level=2] [ref=e266]
+      - paragraph [ref=e267]: ★ YOU'VE UNLOCKED ACHIEVEMENTS ★
+    - generic [ref=e268]:
+      - generic [ref=e271]:
+        - generic [ref=e272]: 🧠
+        - generic [ref=e273]: NEURAL LINK
+        - generic [ref=e274]: ESTABLISHED
+        - generic [ref=e275]: Browser ML Pioneer
+      - generic [ref=e278]:
+        - generic [ref=e279]: 🔒
+        - generic [ref=e280]: PRIVACY
+        - generic [ref=e281]: GUARDIAN
+        - generic [ref=e282]: On-device Processing
+      - generic [ref=e285]:
+        - generic [ref=e286]: ⚡
+        - generic [ref=e287]: REAL-TIME
+        - generic [ref=e288]: RESPONDER
+        - generic [ref=e289]: WebSocket Architecture
+      - generic [ref=e292]:
+        - generic [ref=e293]: 🤖
+        - generic [ref=e294]: MULTI-AGENT
+        - generic [ref=e295]: MASTER
+        - generic [ref=e296]: Agentic AI Systems
+      - generic [ref=e299]:
+        - generic [ref=e300]: 🚁
+        - generic [ref=e301]: AUTONOMOUS
+        - generic [ref=e302]: NAVIGATOR
+        - generic [ref=e303]: IoT + AI Integration
+    - button "[ 🔄 RESTART JOURNEY ]" [ref=e304]

@@ -1,0 +1,46 @@
+# Joel Shibu (Joel) — AI Generalist & Full Stack Developer
+
+> Official technical portfolio and profile of Joel Shibu (commonly searched as "Joel"), AI Generalist and Full Stack Developer transforming artificial intelligence research into production systems across healthcare diagnostics, autonomous robotics, and agentic LLM integration.
+
+## Canonical Web Resources
+- [Official Portfolio](https://portfolio-site-self-eta.vercel.app/): Interactive cinematic 3D scrollytelling engineering showcase.
+- [LinkedIn Profile](https://www.linkedin.com/in/joel-shibu-b6bb54352/): Professional credentials, industry experience, and network.
+- [GitHub Profile](https://github.com/Joel-Shibu): Open-source engineering repositories, robotics code, and ML models.
+- [Full LLM Context File](https://portfolio-site-self-eta.vercel.app/llms-full.txt): Complete technical breakdown for deep LLM retrieval.
+
+## Featured Engineering Projects
+
+### 1. NeuroSight (Healthcare AI / Neurological Screening)
+- **Repository**: [https://github.com/MedBotix/NeuroSight](https://github.com/MedBotix/NeuroSight)
+- **Core Focus**: Browser-based AI platform for early neurological screening using real-time eye-movement tracking.
+- **Key Metrics**: 94% diagnostic accuracy, 47ms edge inference latency, 100% on-device patient privacy.
+- **Tech Stack**: TensorFlow.js, React 19, FastAPI, Python.
+
+### 2. RESP-AI (Acoustic AI / Pulmonary Health)
+- **Repository**: [https://github.com/MedTechHealth/RESP-AI](https://github.com/MedTechHealth/RESP-AI)
+- **Core Focus**: Real-time acoustic respiratory monitoring utilizing a two-stage convolutional neural network (CNN) cascade.
+- **Key Metrics**: 97.3% classification accuracy, 94ms processing latency, 48 kHz continuous audio streaming.
+- **Tech Stack**: Convolutional Neural Networks (CNNs), Flutter, Python, WebSockets.
+
+### 3. AirGuardian (Autonomous Robotics & SLAM)
+- **Repository**: [https://github.com/Joel-Shibu](https://github.com/Joel-Shibu)
+- **Core Focus**: Autonomous indoor drone system for industrial environmental intelligence and hazardous area inspection.
+- **Key Metrics**: 500m² coverage capacity, 8-sensor IoT telemetry fusion, real-time autonomous SLAM navigation.
+- **Tech Stack**: OpenCV visual processing, ESP32 (C++), Robot Operating System (ROS / ROS2), Arduino.
+
+## Technical Skills & Arsenal
+- **AI & Machine Learning**: PyTorch, TensorFlow, TensorFlow.js, OpenCV, Convolutional Neural Networks (CNNs), Prompt Design in Vertex AI.
+- **Systems & Robotics**: ROS / ROS2, ESP32 (C++), Arduino, SLAM (Simultaneous Localization and Mapping), Multi-Sensor Fusion, WebSockets.
+- **Full-Stack, Cloud & DevOps**: Next.js 16, React 19, TypeScript, Tailwind CSS, FastAPI, Flutter, Docker, Google Cloud Platform (GCP), CI/CD.
+
+## Verified Certifications & Experience
+- **STEM Robotics Internationals**: AI & Robotics Intern.
+- **Google Cloud**: Prompt Design in Vertex AI.
+- **Johnson & Johnson**: Robotics & Controls Accreditation.
+- **Electronic Arts**: Software Engineering Accreditation.
+
+## Location & Academic Affiliation (Geographic Data)
+- **Primary Residence / Origin**: Adoor, Kerala, India (Coordinates: 09.1530° N, 76.7356° E).
+- **University**: APJ Abdul Kalam Technological University, Kerala, India.
+- **College**: Baselios Mathews II College of Engineering, Sasthamcotta, Kerala, India.
+- **Direct Contact**: joelshibuadoor@gmail.com

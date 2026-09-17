@@ -7,18 +7,18 @@
   </h1>
   
   <p align="center" style="font-size: 1.2rem; color: #555; text-transform: uppercase; letter-spacing: 1px;">
-    <strong>AI Engineer &nbsp; &middot; &nbsp; Full-Stack Developer</strong>
+    <strong>AI Generalist &nbsp; &middot; &nbsp; Full-Stack Developer</strong>
   </p>
 
   <p align="center" style="font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: #666;">
-    Building scalable artificial intelligence systems, real-time machine learning pipelines, and elegant, high-performance user interfaces.
+    Transforming AI research into production systems across healthcare diagnostics, autonomous robotics, and agentic LLM integration.
   </p>
 
   <br />
 
   <p align="center">
     <a href="https://portfolio-site-self-eta.vercel.app" style="text-decoration: none; color: inherit;"><b>PORTFOLIO</b></a> &nbsp;&nbsp;&nbsp;︱&nbsp;&nbsp;&nbsp; 
-    <a href="https://linkedin.com/in/joel-shibu-b6bb54352" style="text-decoration: none; color: inherit;"><b>LINKEDIN</b></a> &nbsp;&nbsp;&nbsp;︱&nbsp;&nbsp;&nbsp; 
+    <a href="https://www.linkedin.com/in/joel-shibu-b6bb54352/" style="text-decoration: none; color: inherit;"><b>LINKEDIN</b></a> &nbsp;&nbsp;&nbsp;︱&nbsp;&nbsp;&nbsp; 
     <a href="mailto:joelshibuadoor@gmail.com" style="text-decoration: none; color: inherit;"><b>EMAIL</b></a>
   </p>
 
@@ -33,41 +33,44 @@
     <td width="50%" valign="top" style="border: 1px solid #eaeaea; padding: 24px; border-radius: 12px; background-color: #fafbfc;">
       <h3 style="margin-top: 0; font-size: 1.4em;">NeuroSight</h3>
       <p style="color: #586069; margin-top: -10px;"><i>Privacy-First Neurological Screening AI</i></p>
-      <p>AI-powered tool for dementia detection through eye movement analysis. Deep learning models run entirely in-browser with zero server data retention.</p>
-      <p><code>TensorFlow.js</code> <code>React</code> <code>FastAPI</code></p>
-      <b>Performance:</b> 94% Accuracy • 47ms Latency<br/><br/>
-      <a href="https://github.com/MedBotix/NeuroSight">→ View Architecture</a>
+      <p>Browser-based AI platform for neurological health screening using real-time eye-movement analysis. Built with TensorFlow.js and React to process all inference on-device for 100% patient data privacy.</p>
+      <p><code>TensorFlow.js</code> <code>React 19</code> <code>FastAPI</code> <code>Python</code></p>
+      <b>Performance:</b> 94% Accuracy • 47ms Latency • 100% On-Device<br/><br/>
+      <a href="https://github.com/MedBotix/NeuroSight">→ View Repository & Architecture</a>
     </td>
     <td width="50%" valign="top" style="border: 1px solid #eaeaea; padding: 24px; border-radius: 12px; background-color: #fafbfc;">
       <h3 style="margin-top: 0; font-size: 1.4em;">RESP-AI</h3>
-      <p style="color: #586069; margin-top: -10px;"><i>Real-Time Respiratory Monitoring</i></p>
-      <p>Cross-platform mobile application utilizing CNN-based acoustic analysis for respiratory health tracking with live WebSockets streaming capability.</p>
-      <p><code>Flutter</code> <code>Python</code> <code>CNN</code></p>
-      <b>Performance:</b> 97.3% Accuracy • 94ms Latency<br/><br/>
-      <a href="https://github.com/MedTechHealth/RESP-AI">→ View Architecture</a>
+      <p style="color: #586069; margin-top: -10px;"><i>Real-Time Pulmonary Acoustic Monitoring</i></p>
+      <p>Real-time respiratory health monitoring system utilizing CNN-based acoustic analysis and a two-stage cascade architecture. Streams 48 kHz audio over WebSockets with cross-platform Flutter deployment.</p>
+      <p><code>CNN</code> <code>Flutter</code> <code>Python</code> <code>WebSockets</code></p>
+      <b>Performance:</b> 97.3% Accuracy • 94ms Latency • 48 kHz Stream<br/><br/>
+      <a href="https://github.com/MedTechHealth/RESP-AI">→ View Repository & Architecture</a>
     </td>
   </tr>
   <tr style="border: none;">
     <td width="50%" valign="top" style="border: 1px solid #eaeaea; padding: 24px; border-radius: 12px; background-color: #fafbfc;">
       <h3 style="margin-top: 0; font-size: 1.4em;">AirGuardian</h3>
-      <p style="color: #586069; margin-top: -10px;"><i>Autonomous Drone Intelligence</i></p>
-      <p>Autonomous drone system for indoor air quality monitoring. Integrated IoT gas leak sensors with OpenCV navigation algorithms for real-time risk assessment.</p>
-      <p><code>Python</code> <code>OpenCV</code> <code>ESP32</code></p>
-      <b>Performance:</b> 500m² Coverage • 8-Sensor Fusion
+      <p style="color: #586069; margin-top: -10px;"><i>Autonomous Indoor Drone Intelligence</i></p>
+      <p>Autonomous indoor drone navigation system for environmental intelligence and industrial safety. Integrates 8-sensor IoT telemetry fusion with OpenCV visual processing and ROS SLAM mapping over 500m² coverage.</p>
+      <p><code>OpenCV</code> <code>ESP32 (C++)</code> <code>ROS / ROS2</code> <code>SLAM</code></p>
+      <b>Performance:</b> 500m² Coverage • 8-Sensor Fusion • SLAM Nav<br/><br/>
+      <a href="https://github.com/Joel-Shibu">→ View Robotics Repository</a>
     </td>
     <td width="50%" valign="top" style="border: 1px solid #eaeaea; padding: 24px; border-radius: 12px; background-color: #fafbfc;">
-      <h3 style="margin-top: 0; font-size: 1.4em;">AI & Robotics</h3>
-      <p style="color: #586069; margin-top: -10px;"><i>STEM Robotics Engineering</i></p>
-      <p>Developed Python automation scripts for robotic control, built ML models for sensor predictive maintenance, and integrated PyTorch for edge decision making.</p>
-      <p><code>PyTorch</code> <code>ROS</code> <code>Python</code></p>
-      <b>Focus:</b> Automation • Predictive Maintenance
+      <h3 style="margin-top: 0; font-size: 1.4em;">Experience & Accreditations</h3>
+      <p style="color: #586069; margin-top: -10px;"><i>Industry Experience & Certifications</i></p>
+      <p>• <b>AI & Robotics Intern:</b> STEM Robotics Internationals<br/>
+      • <b>Prompt Design in Vertex AI:</b> Google Cloud<br/>
+      • <b>Robotics & Controls:</b> Johnson & Johnson<br/>
+      • <b>Software Engineering:</b> Electronic Arts</p>
+      <b>Location:</b> Adoor, Kerala, India • BMCE Sasthamcotta
     </td>
   </tr>
 </table>
 
 <br/>
 
-### ✦ TECHNICAL ARCHITECTURE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+### ✦ TECHNICAL ARSENAL ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 <div align="center">
   <br/>
@@ -77,16 +80,24 @@
 
 <br/>
 
-### ✦ ENGINEERING METRICS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+### ✦ LOCAL SETUP & DEPLOYMENT ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+```bash
+# Install dependencies
+npm install
+
+# Run local development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+---
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Joel-Shibu&show_icons=true&theme=transparent&hide_border=true&title_color=111111&text_color=333333&icon_color=666666&bg_color=ffffff&rank_icon=github" height="160" alt="GitHub Stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Joel-Shibu&layout=compact&theme=transparent&hide_border=true&title_color=111111&text_color=333333" height="160" alt="Top Languages" />
-</div>
-
-<br/>
-<br/>
-
-<div align="center">
-  <p style="color: #888;"><i>Designing the future of intelligent systems.</i></p>
+  <p style="color: #888;"><i>© 2026 Joel Shibu. Designed for performance, accessibility, and autonomous intelligence.</i></p>
 </div>
